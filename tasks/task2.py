@@ -5,7 +5,7 @@ def get_numbers_ticket(_min: int, _max: int, quantity: int) -> list[int]:
         return []
 
     result: list[int] = random.sample(
-        range(_min, _max),
+        range(_min, _max + 1),
         k = quantity
     )
     result.sort()
