@@ -1,3 +1,4 @@
+import calendar
 from datetime import datetime, date, timedelta
 
 
@@ -12,11 +13,11 @@ def get_upcoming_birthdays(users: list[dict[str, str]]) -> list[dict[str, str]]:
             year = seven_days_later.year,
             month = users_birthday.month,
             day = users_birthday.day
-        ) if users_birthday.month != 2 and users_birthday.day != 29 else date(
+        ) if not (users_birthday.month == 2 and users_birthday.day == 29 and calendar.isleap(seven_days_later.year)) else date(
             # leap year case
             year=seven_days_later.year,
             month=users_birthday.month,
-            day=users_birthday.day - 1
+            day=users_birthday.day - 1 if not calendar.isleap(seven_days_later.year) else users_birthday.day
         )
 
         if now <= coming_birthday < seven_days_later:
